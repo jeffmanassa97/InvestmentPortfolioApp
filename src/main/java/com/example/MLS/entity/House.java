@@ -92,6 +92,7 @@ public class House {
     /**
      * Setters and Getters.
      */
+    public House() {}
 
     public Long getId() {
         return id;
@@ -137,7 +138,7 @@ public class House {
         return address;
     }
 
-public void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

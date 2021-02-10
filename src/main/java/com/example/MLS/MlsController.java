@@ -72,19 +72,22 @@ public class MlsController {
     }
 
     @RequestMapping("/AddInvestment")
-    public String addInvestment(){
+    public String addInvestment(Model model){
+        model.addAttribute("house", new House());
+        model.addAttribute("mortgage", new Mortgage());
+
         return "add_investment";
     }
 
-    @RequestMapping(value = "/process_investment", method = {RequestMethod.GET, RequestMethod.POST})
-    public String processHouse(House house, @RequestParam("images") MultipartFile[] files, Mortgage mortgage) {
+    @RequestMapping(value = "/process_investment", method = {RequestMethod.GET, RequestMethod.POST}, consumes = {"multipart/form-data"})
+    public String processHouse(@RequestParam("pics") MultipartFile[] files, @ModelAttribute("house") House house, @ModelAttribute("mortgage") Mortgage mortgage) {
         // Mortgage -> House
         house.setMortgage(mortgage);
 
         // Images -> House
-        Set<Image> images = house.getImages();
-        if (images == null)
-            images = new HashSet<>();
+        Set<Image> images = new HashSet<>();
+//        if (images == null)
+//            images = new HashSet<>();
         for (MultipartFile file: files) {
             images.add(imageStorageService.getImage(file));
         }

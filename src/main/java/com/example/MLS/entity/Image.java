@@ -21,12 +21,14 @@ public class Image {
     private String imgType;
 
     @Lob
-    private byte[] date;
+    private byte[] data;
 
-    public Image(String imgName, String imgType, byte[] date) {
+    public Image() {}
+
+    public Image(String imgName, String imgType, byte[] data) {
         this.imgName = imgName;
         this.imgType = imgType;
-        this.date = date;
+        this.data = data;
     }
 
     // Setters and Getters
@@ -63,11 +65,11 @@ public class Image {
         this.imgType = imgType;
     }
 
-    public byte[] getDate() {
-        return date;
+    public byte[] getData() {
+        return data;
     }
 
-    public void setDate(byte[] date) {
-        this.date = date;
+    public void setData(byte[] data) {
+        this.data = data;
     }
 }
