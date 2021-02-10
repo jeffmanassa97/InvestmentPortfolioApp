@@ -1,22 +1,37 @@
 package com.example.MLS;
 
+import com.example.MLS.entity.House;
+import com.example.MLS.entity.Image;
+import com.example.MLS.entity.Mortgage;
 import com.example.MLS.entity.User;
+import com.example.MLS.repository.HouseRepository;
+import com.example.MLS.repository.MortgageRepository;
 import com.example.MLS.repository.UserRepository;
+import com.example.MLS.service.ImageStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class MlsController {
 
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository userRepository;
+
+    @Autowired
+    private ImageStorageService imageStorageService;
 
     @RequestMapping("/")
     public String index(){
-        return "start";
+        return "index";
     }
 
     @GetMapping("/register")
@@ -32,14 +47,14 @@ public class MlsController {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
-        userRepo.save(user);
+        userRepository.save(user);
 
         return "register_success";
     }
 
     @GetMapping("/list_users")
     public String viewUsersList(Model model) {
-        model.addAttribute("listUsers", userRepo.findAll());
+        model.addAttribute("listUsers", userRepository.findAll());
 
         return "users";
     }
@@ -51,7 +66,7 @@ public class MlsController {
 
     @GetMapping("/AllInvestments")
     public String allInvestments(Model model) {
-        model.addAttribute("user", userRepo.findByEmail("jeffmanassa@gmail.com"));
+        model.addAttribute("user", userRepository.findByEmail("jeffmanassa@gmail.com"));
 
         return "all_investments";
     }
@@ -61,6 +76,39 @@ public class MlsController {
         return "add_investment";
     }
 
+    @RequestMapping(value = "/process_investment", method = {RequestMethod.GET, RequestMethod.POST})
+    public String processHouse(House house, @RequestParam("images") MultipartFile[] files, Mortgage mortgage) {
+        // Mortgage -> House
+        house.setMortgage(mortgage);
+
+        // Images -> House
+        Set<Image> images = house.getImages();
+        if (images == null)
+            images = new HashSet<>();
+        for (MultipartFile file: files) {
+            images.add(imageStorageService.getImage(file));
+        }
+        house.setImages(images);
+
+        // House -> User
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        User user = userRepository.findByEmail(username);
+
+        Set<House> houses = user.getHouses();
+        if (houses == null)
+            houses = new HashSet<>();
+        houses.add(house);
+        user.setHouses(houses);
+        userRepository.save(user);
+
+        return "add_investment_success";
+    }
 
 
 }

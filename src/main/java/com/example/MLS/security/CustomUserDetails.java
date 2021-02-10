@@ -1,4 +1,4 @@
-package com.example.MLS;
+package com.example.MLS.security;
 
 import com.example.MLS.entity.User;
 import org.springframework.security.core.GrantedAuthority;

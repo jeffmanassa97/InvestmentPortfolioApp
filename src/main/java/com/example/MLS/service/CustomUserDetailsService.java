@@ -1,7 +1,8 @@
-package com.example.MLS;
+package com.example.MLS.service;
 
 import com.example.MLS.entity.User;
 import com.example.MLS.repository.UserRepository;
+import com.example.MLS.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

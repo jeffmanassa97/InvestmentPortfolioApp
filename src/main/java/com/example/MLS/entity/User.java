@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<House> houses = new HashSet<>();
 
     @Column(nullable = false, unique = true, length = 45)
@@ -27,6 +27,14 @@ public class User {
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
 
+
+    public Set<House> getHouses() {
+        return houses;
+    }
+
+    public void setHouses(Set<House> houses) {
+        this.houses = houses;
+    }
 
     public Long getId() {
         return id;
