@@ -11,10 +11,11 @@ public class Mortgage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "mortgage_id")
+    private Long mortgageId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "house_id")
+    @JoinColumn(name = "house_id", nullable = false)
     private House house;
 
     @Column(name = "total_initial_loan", nullable = false, scale = 2)
@@ -47,11 +48,11 @@ public class Mortgage {
     public Mortgage() {}
 
     public Long getId() {
-        return id;
+        return mortgageId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long mortgageId) {
+        this.mortgageId = mortgageId;
     }
 
     public House getHouse() {

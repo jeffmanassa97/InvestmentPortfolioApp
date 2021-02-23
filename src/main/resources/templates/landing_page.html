@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Investments</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+    <!--<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>-->
+    <!--<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>-->
+
+    <script type="text/javascript" th:src="@{/js/all-investments.js}"></script>
+    <link rel="stylesheet" type="text/css" href="/css/all_investments.css">
+
+</head>
+<body>
+
+
+<nav class="nav">
+    <div class="container">
+        <div class="logo">
+            <a href="#"><img th:src="@{/images/house-icon.png}" style="height:50px; width:50px" alt="house"/></a>
+        </div>
+        <div id="mainListDiv" class="main_list">
+            <ul class="navlinks">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+    </div>
+</nav>
+
+<section class="home">
+</section>
+<div style="height: 1000px">
+    <!-- just to make scrolling effect possible -->
+    <h2 class="myH2">What is this ?</h2>
+    <p class="myP">This is a responsive fixed navbar animated on scroll</p>
+    <p class="myP">I took inspiration from  ABDO STEIF (<a href="https://codepen.io/abdosteif/pen/bRoyMb?editors=1100">https://codepen.io/abdosteif/pen/bRoyMb?editors=1100</a>)
+        and Dicson <a href="https://codepen.io/dicson/pen/waKPgQ">(https://codepen.io/dicson/pen/waKPgQ)</a></p>
+    <p class="myP">I HOPE YOU FIND THIS USEFULL</p>
+    <p class="myP">Albi</p>
+</div>
+
+
+</body>
+</html>

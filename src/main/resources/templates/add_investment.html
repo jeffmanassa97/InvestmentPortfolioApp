@@ -4,263 +4,283 @@
     <meta charset="UTF-8">
     <title>Add Investments</title>
 
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="/css/styles.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />-->
+    <!--<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>-->
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/add_investment.css">
+
 </head>
 <body>
-    <form th:action="@{/process_investment}" encType="multipart/form-data"
-          method="post" style="max-width: 600px; margin: 0 auto;">
-        <div class="m-3">
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Upload Images: </label>
-                <div class="col-8">
-                    <input type="file" name="pics" multiple required />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Address: </label>
-                <div class="col-8">
-                    <input type="text" th:value="${house.address}" name="address" class="form-control" required />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-4 col-form-label">State: </label>
-                <select class="form-control mb-4 col-4 col-xs-4 selectpicker" th:field="*{house.state}" name="state" required>
-                    <option value="">Please Select</option>
-                    <option th:value="'AL'">Alabama</option>
-                    <option th:value="'AK'">Alaska</option>
-                    <option th:value="'AZ'">Arizona</option>
-                    <option th:value="'AR'">Arkansas</option>
-                    <option th:value="'CA'">California</option>
-                    <option th:value="'CO'">Colorado</option>
-                    <option th:value="'CT'">Connecticut</option>
-                    <option th:value="'DE'">Delaware</option>
-                    <option th:value="'DC'">District Of Columbia</option>
-                    <option th:value="'FL'">Florida</option>
-                    <option th:value="'GA'">Georgia</option>
-                    <option th:value="'HI'">Hawaii</option>
-                    <option th:value="'ID'">Idaho</option>
-                    <option th:value="'IL'">Illinois</option>
-                    <option th:value="'IN'">Indiana</option>
-                    <option th:value="'IA'">Iowa</option>
-                    <option th:value="'KS'">Kansas</option>
-                    <option th:value="'KY'">Kentucky</option>
-                    <option th:value="'LA'">Louisiana</option>
-                    <option th:value="'ME'">Maine</option>
-                    <option th:value="'MD'">Maryland</option>
-                    <option th:value="'MA'">Massachusetts</option>
-                    <option th:value="'MI'">Michigan</option>
-                    <option th:value="'MN'">Minnesota</option>
-                    <option th:value="'MS'">Mississippi</option>
-                    <option th:value="'MO'">Missouri</option>
-                    <option th:value="'MT'">Montana</option>
-                    <option th:value="'NE'">Nebraska</option>
-                    <option th:value="'NV'">Nevada</option>
-                    <option th:value="'NH'">New Hampshire</option>
-                    <option th:value="'NJ'">New Jersey</option>
-                    <option th:value="'NM'">New Mexico</option>
-                    <option th:value="'NY'">New York</option>
-                    <option th:value="'NC'">North Carolina</option>
-                    <option th:value="'ND'">North Dakota</option>
-                    <option th:value="'OH'">Ohio</option>
-                    <option th:value="'OK'">Oklahoma</option>
-                    <option th:value="'OR'">Oregon</option>
-                    <option th:value="'PA'">Pennsylvania</option>
-                    <option th:value="'RI'">Rhode Island</option>
-                    <option th:value="'SC'">South Carolina</option>
-                    <option th:value="'SD'">South Dakota</option>
-                    <option th:value="'TN'">Tennessee</option>
-                    <option th:value="'TX'">Texas</option>
-                    <option th:value="'UT'">Utah</option>
-                    <option th:value="'VT'">Vermont</option>
-                    <option th:value="'VA'">Virginia</option>
-                    <option th:value="'WA'">Washington</option>
-                    <option th:value="'WV'">West Virginia</option>
-                    <option th:value="'WI'">Wisconsin</option>
-                    <option th:value="'WY'">Wyoming</option>
-                </select>
-            </div>
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Zip Code: </label>
-                <div class="col-8">
-                    <input type="number" th:value="${house.zipCode}" name="zipCode" class="form-control" required />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Purchase Price: </label>
-                <div class="col-8">
-                    <input type="number" min="0.01" step="0.01" th:value="${house.purchasePrice}" name="purchasePrice" class="form-control" required />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Down Payment Amount: </label>
-                <div class="col-8">
-                    <input type="number" min="0.01" step="0.01" th:value="${house.downPaymentAmount}" name="downPaymentAmount" class="form-control" required />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Closing Date: </label>
-                <div class="col-8">
-                    <input type="date" th:value="${house.closingDate}" name="closingDate" class="form-control" />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Number of Beds: </label>
-                <div class="col-8">
-                    <input type="number" th:value="${house.numBeds}" name="numBeds" class="form-control" />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Number of Full Baths: </label>
-                <div class="col-8">
-                    <input type="number" th:value="${house.numFullBaths}" name="numFullBaths" class="form-control" />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Number of Half Baths: </label>
-                <div class="col-8">
-                    <input type="number" th:value="${house.numHalfBaths}" name="numHalfBaths" class="form-control" />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Year Built: </label>
-                <div class="col-8">
-                    <input type="number" th:value="${house.yearBuilt}" name="yearBuilt" class="form-control" />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Square feet: </label>
-                <div class="col-8">
-                    <input type="number" th:value="${house.squareFeet}" name="squareFeet" class="form-control" />
-                </div>
-            </div>
-                 
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Manufacture Date of HVAC: </label>
-                <div class="col-8">
-                    <input type="date" th:value="${house.dateHVAC}" name="dateHVAC" class="form-control" />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Manufacture Date of Roof: </label>
-                <div class="col-8">
-                    <input type="date" th:value="${house.dateRoof}" name="dateRoof" class="form-control" />
-                </div>
-            </div>
-                 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Manufacture Date of Plumbing: </label>
-                <div class="col-8">
-                    <input type="date" th:value="${house.datePlumbing}" name="datePlumbing" class="form-control" />
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Manufacture Date of Water Heater: </label>
-                <div class="col-8">
-                    <input type="date" th:value="${house.dateWaterHeater}" name="dateWaterHeater" class="form-control" />
+<div class="container-fluid add_investment">
+    <div class="row">
+        <div class="col-md-12 add_investment-center">
+            <div class="tab-content" id="myTabContent">
+                <h3 class="add_investment-title">Add a Home to Your Portfolio</h3>
+                <div class="row add_investment-form">
+                    <form id="form" th:action="@{/process_investment}" encType="multipart/form-data"
+                          method="post" style="margin: 0 auto;">
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Upload Images: </label>
+                            <div class="col-9">
+                                <input type="file" name="pics" class="form-control" multiple required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input type="text" th:value="${house.address}" name="address" class="form-control" placeholder="Address *" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <select class="form-control selectpicker" th:field="*{house.state}" name="state" required>
+                                    <option value="">State</option>
+                                    <option th:value="'AL'">Alabama</option>
+                                    <option th:value="'AK'">Alaska</option>
+                                    <option th:value="'AZ'">Arizona</option>
+                                    <option th:value="'AR'">Arkansas</option>
+                                    <option th:value="'CA'">California</option>
+                                    <option th:value="'CO'">Colorado</option>
+                                    <option th:value="'CT'">Connecticut</option>
+                                    <option th:value="'DE'">Delaware</option>
+                                    <option th:value="'DC'">District Of Columbia</option>
+                                    <option th:value="'FL'">Florida</option>
+                                    <option th:value="'GA'">Georgia</option>
+                                    <option th:value="'HI'">Hawaii</option>
+                                    <option th:value="'ID'">Idaho</option>
+                                    <option th:value="'IL'">Illinois</option>
+                                    <option th:value="'IN'">Indiana</option>
+                                    <option th:value="'IA'">Iowa</option>
+                                    <option th:value="'KS'">Kansas</option>
+                                    <option th:value="'KY'">Kentucky</option>
+                                    <option th:value="'LA'">Louisiana</option>
+                                    <option th:value="'ME'">Maine</option>
+                                    <option th:value="'MD'">Maryland</option>
+                                    <option th:value="'MA'">Massachusetts</option>
+                                    <option th:value="'MI'">Michigan</option>
+                                    <option th:value="'MN'">Minnesota</option>
+                                    <option th:value="'MS'">Mississippi</option>
+                                    <option th:value="'MO'">Missouri</option>
+                                    <option th:value="'MT'">Montana</option>
+                                    <option th:value="'NE'">Nebraska</option>
+                                    <option th:value="'NV'">Nevada</option>
+                                    <option th:value="'NH'">New Hampshire</option>
+                                    <option th:value="'NJ'">New Jersey</option>
+                                    <option th:value="'NM'">New Mexico</option>
+                                    <option th:value="'NY'">New York</option>
+                                    <option th:value="'NC'">North Carolina</option>
+                                    <option th:value="'ND'">North Dakota</option>
+                                    <option th:value="'OH'">Ohio</option>
+                                    <option th:value="'OK'">Oklahoma</option>
+                                    <option th:value="'OR'">Oregon</option>
+                                    <option th:value="'PA'">Pennsylvania</option>
+                                    <option th:value="'RI'">Rhode Island</option>
+                                    <option th:value="'SC'">South Carolina</option>
+                                    <option th:value="'SD'">South Dakota</option>
+                                    <option th:value="'TN'">Tennessee</option>
+                                    <option th:value="'TX'">Texas</option>
+                                    <option th:value="'UT'">Utah</option>
+                                    <option th:value="'VT'">Vermont</option>
+                                    <option th:value="'VA'">Virginia</option>
+                                    <option th:value="'WA'">Washington</option>
+                                    <option th:value="'WV'">West Virginia</option>
+                                    <option th:value="'WI'">Wisconsin</option>
+                                    <option th:value="'WY'">Wyoming</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" th:value="${house.zipCode}" name="zipCode" class="form-control"
+                                       placeholder="Zip Code *" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-icon">
+                                        <input type="number" min="0.01" step="0.01" th:value="${house.purchasePrice}"
+                                               name="purchasePrice" class="form-control" placeholder="Purchase Price *" required />
+                                        <i>$</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-icon">
+                                        <input type="number" min="0.01" step="0.01" th:value="${house.downPaymentAmount}"
+                                               name="downPaymentAmount" class="form-control" placeholder="Down Payment *" required />
+                                        <i>$</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Closing Date: </label>
+                            <div class="col-9">
+                                <input type="date" th:value="${house.closingDate}" name="closingDate" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <input type="number" th:value="${house.numBeds}" name="numBeds" class="form-control"
+                                       placeholder="# of Beds *"/>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" th:value="${house.numFullBaths}" name="numFullBaths"
+                                       class="form-control" placeholder="# of Full Baths *" />
+                            </div>
+                            <div class="col-4">
+                                <input type="number" th:value="${house.numHalfBaths}" name="numHalfBaths"
+                                       class="form-control" placeholder="# of Half Baths *" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <input type="number" th:value="${house.yearBuilt}" name="yearBuilt"
+                                       class="form-control" placeholder="Year Built *"/>
+                            </div>
+                            <div class="col-6">
+                                <input type="number" th:value="${house.squareFeet}" name="squareFeet"
+                                       class="form-control" placeholder="Square Feet *" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="input-icon">
+                                        <input type="number" min="0.01" step="0.01" th:value="${house.monthlyRent}" name="monthlyRent"
+                                               class="form-control" placeholder="Monthly Rent ($) *"/>
+                                        <i>$</i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input type="text" th:value="${house.notes}" name="notes" class="form-control"
+                                       placeholder="Notes *"/>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="form-group row">
+                            <h3 class="add_investment-header">Manufacture Dates</h3>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">HVAC: </label>
+                            <div class="col-4">
+                                <input type="date" th:value="${house.dateHVAC}" name="dateHVAC" class="form-control" />
+                            </div>
+                            <label class="col-2 col-form-label">Roof: </label>
+                            <div class="col-4">
+                                <input type="date" th:value="${house.dateRoof}" name="dateRoof" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Plumbing: </label>
+                            <div class="col-4">
+                                <input type="date" th:value="${house.datePlumbing}" name="datePlumbing" class="form-control" />
+                            </div>
+                            <label class="col-2 col-form-label">Water Heater: </label>
+                            <div class="col-4">
+                                <input type="date" th:value="${house.dateWaterHeater}" name="dateWaterHeater" class="form-control" />
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="form-group row">
+                            <h3 class="add_investment-header">Mortgage Information</h3>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label">First Payment Date: </label>
+                            <div class="col-8">
+                                <input type="date" th:value="${mortgage.firstPaymentDate}" name="firstPaymentDate"
+                                       class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-icon">
+                                        <input type="number" min="0.01" step="0.01" th:value="${mortgage.totalInitialLoan}"
+                                               name="totalInitialLoan" class="form-control" required
+                                               placeholder="Initial Loan Amount *"/>
+                                        <i>$</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-icon">
+                                        <input type="number" min="0.01" step="0.01" th:value="${mortgage.interestRate}"
+                                               name="interestRate" class="form-control" required placeholder="Interest Rate (0.00) *"/>
+                                        <i>%</i>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-icon">
+                                        <input type="number" min="0.01" step="0.01" th:value="${mortgage.monthlyPayment}" name="monthlyPayment"
+                                               class="form-control" required placeholder="Total Mortgage (Per Month) *"/>
+                                        <i>$</i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <input type="number" th:value="${mortgage.length}" name="length" class="form-control"
+                                       placeholder="Length of Mortgage (Years) *" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-icon">
+                                        <input type="number" min="0.01" step="0.01" th:value="${mortgage.PI}" name="PI"
+                                               class="form-control" placeholder="Principal & Interest (Per Month) *" />
+                                        <i>$</i>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="input-icon">
+                                        <input type="number" min="0.01" step="0.01" th:value="${mortgage.propertyTaxMonthly}"
+                                               name="propertyTaxMonthly" class="form-control" placeholder="Property Tax (Per Month) *" />
+                                        <i>$</i>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <input type="text" th:value="${mortgage.bankName}" name="bankName" class="form-control"
+                                       placeholder="Bank Name *" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6"></div>
+                            <div class="col-6">
+                                <button id="add_investment-button" type="submit" class="btn btnAdd">Add Investment</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Total Monthly Rent Income: </label>
-                <div class="col-8">
-                    <input type="number" min="0.01" step="0.01" th:value="${house.monthlyRent}" name="monthlyRent" class="form-control" />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Notes: </label>
-                <div class="col-8">
-                    <input type="text" th:value="${house.notes}" name="notes" class="form-control" />
-                </div>
-            </div>
-            <br>
-            <br>
-
-            <!-- Mortgage -->
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Initial Loan Amount: </label>
-                <div class="col-8">
-                    <input type="number" min="0.01" step="0.01" th:value="${mortgage.totalInitialLoan}" name="totalInitialLoan" class="form-control" required />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">First Payment Due Date: </label>
-                <div class="col-8">
-                    <input type="date" th:value="${mortgage.firstPaymentDate}" name="firstPaymentDate" class="form-control" required />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Interest Rate: </label>
-                <div class="col-8">
-                    <input type="number" min="0.01" step="0.01" th:value="${mortgage.interestRate}" name="interestRate" class="form-control" required />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Total Monthly Mortgage Payment: </label>
-                <div class="col-8">
-                    <input type="number" min="0.01" step="0.01" th:value="${mortgage.monthlyPayment}" name="monthlyPayment" class="form-control" required />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Length of Mortgage in Years (ex: 15 vs 30 year): </label>
-                <div class="col-8">
-                    <input type="number" th:value="${mortgage.length}" name="length" class="form-control" required />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Monthly Principal & Interest Payment: </label>
-                <div class="col-8">
-                    <input type="number" min="0.01" step="0.01" th:value="${mortgage.PI}" name="PI" class="form-control" />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Monthly Property Tax Payment: </label>
-                <div class="col-8">
-                    <input type="number" min="0.01" step="0.01" th:value="${mortgage.propertyTaxMonthly}" name="propertyTaxMonthly" class="form-control" />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Day of the Month Mortgage is Due: </label>
-                <div class="col-8">
-                    <input type="number" th:value="${mortgage.monthlyDueDay}" name="monthlyDueDay" class="form-control" />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Bank Name: </label>
-                <div class="col-8">
-                    <input type="text" th:value="${mortgage.bankName}" name="bankName" class="form-control" />
-                </div>
-            </div>
-
-
-
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Add Investment</button>
             </div>
         </div>
-    </form>
+    </div>
+</div>
+
 </body>
 </html>

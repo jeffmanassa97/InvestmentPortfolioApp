@@ -8,10 +8,11 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "image_id")
+    private Long imageId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "house")
+    @JoinColumn(name = "house_id", nullable = false)
     private House house;
 
     @Column(name = "image_name")
@@ -31,15 +32,9 @@ public class Image {
         this.data = data;
     }
 
+
+
     // Setters and Getters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public House getHouse() {
         return house;
@@ -71,5 +66,13 @@ public class Image {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 }

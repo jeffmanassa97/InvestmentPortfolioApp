@@ -1,0 +1,18 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.10.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+    <changeSet author="jeffmanassa (generated)" id="1613876683259-3">
+        <addForeignKeyConstraint baseColumnNames="house_id" baseTableName="images" constraintName="FKlep0q67yx6dh5hn24xnlrljmt" deferrable="false" initiallyDeferred="false" referencedColumnNames="house_id" referencedTableName="house" validate="true"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613876683259-4">
+        <addForeignKeyConstraint baseColumnNames="house_id" baseTableName="mortgage" constraintName="FKlli9donk1ri313fqxjk6jqe5j" deferrable="false" initiallyDeferred="false" referencedColumnNames="house_id" referencedTableName="house" validate="true"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613876683259-5">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="house" constraintName="FKmapa5ywv8fp0xuhg9xmdwd9ve" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613876683259-1">
+        <dropUniqueConstraint constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613876683259-2">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+</databaseChangeLog>

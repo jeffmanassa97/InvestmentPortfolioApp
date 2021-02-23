@@ -11,10 +11,11 @@ public class House {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "house_id")
+    private Long houseId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users")
+    @JoinColumn(name = "user_id", nullable = false)
     private User users;
 
     @OneToMany(mappedBy = "house", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -95,11 +96,11 @@ public class House {
     public House() {}
 
     public Long getId() {
-        return id;
+        return houseId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long houseId) {
+        this.houseId = houseId;
     }
 
     public User getUser() {

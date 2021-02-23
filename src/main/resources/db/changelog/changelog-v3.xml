@@ -1,9 +1,9 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-1">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.10.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+    <changeSet author="jeffmanassa (generated)" id="1613842932000-1">
         <createTable tableName="house">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints primaryKey="true"/>
+            <column autoIncrement="true" name="house_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="address" type="VARCHAR(64)">
                 <constraints nullable="false"/>
@@ -34,28 +34,31 @@
             <column name="zip_code" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>
-            <column name="users" type="BIGINT"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-2">
+    <changeSet author="jeffmanassa (generated)" id="1613842932000-2">
         <createTable tableName="images">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints primaryKey="true"/>
+            <column autoIncrement="true" name="image_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="date" type="LONGBLOB"/>
+            <column name="data" type="LONGBLOB"/>
             <column name="image_name" type="VARCHAR(255)"/>
             <column name="image_type" type="VARCHAR(255)"/>
-            <column name="house" type="BIGINT"/>
-            <column name="data" type="LONGBLOB"/>
+            <column name="house_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-3">
+    <changeSet author="jeffmanassa (generated)" id="1613842932000-3">
         <createTable tableName="mortgage">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints primaryKey="true"/>
+            <column autoIncrement="true" name="mortgage_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="pi" type="FLOAT(12)"/>
-            <column name="bank_name" type="BIGINT"/>
+            <column name="bank_name" type="VARCHAR(64)"/>
             <column name="first_payment_date" type="date">
                 <constraints nullable="false"/>
             </column>
@@ -73,16 +76,18 @@
             <column name="total_initial_loan" type="FLOAT(12)">
                 <constraints nullable="false"/>
             </column>
-            <column name="house_id" type="BIGINT"/>
+            <column name="house_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-4">
+    <changeSet author="jeffmanassa (generated)" id="1613842932000-4">
         <createTable tableName="users">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints primaryKey="true"/>
+            <column autoIncrement="true" name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="email" type="VARCHAR(45)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="first_name" type="VARCHAR(20)">
                 <constraints nullable="false"/>
@@ -95,31 +100,19 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-5">
-        <addUniqueConstraint columnNames="email" constraintName="UK_6dotkott2kjsp8vw4d0m25fb7" tableName="users"/>
-    </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-6">
-        <createIndex indexName="FK5964r75fut5x97pbangsn6xrn" tableName="house">
-            <column name="users"/>
+    <changeSet author="jeffmanassa (generated)" id="1613842932000-5">
+        <createIndex indexName="FKlep0q67yx6dh5hn24xnlrljmt" tableName="images">
+            <column name="house_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-7">
-        <createIndex indexName="FKbrrs3h48kys6am4x2v0g38w0x" tableName="images">
-            <column name="house"/>
-        </createIndex>
-    </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-8">
+    <changeSet author="jeffmanassa (generated)" id="1613842932000-6">
         <createIndex indexName="FKlli9donk1ri313fqxjk6jqe5j" tableName="mortgage">
             <column name="house_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-9">
-        <addForeignKeyConstraint baseColumnNames="users" baseTableName="house" constraintName="FK5964r75fut5x97pbangsn6xrn" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="users"/>
-    </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-10">
-        <addForeignKeyConstraint baseColumnNames="house" baseTableName="images" constraintName="FKbrrs3h48kys6am4x2v0g38w0x" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="house"/>
-    </changeSet>
-    <changeSet author="jeffmanassa (generated)" id="1613261796102-11">
-        <addForeignKeyConstraint baseColumnNames="house_id" baseTableName="mortgage" constraintName="FKlli9donk1ri313fqxjk6jqe5j" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="house"/>
+    <changeSet author="jeffmanassa (generated)" id="1613842932000-7">
+        <createIndex indexName="FKmapa5ywv8fp0xuhg9xmdwd9ve" tableName="house">
+            <column name="user_id"/>
+        </createIndex>
     </changeSet>
 </databaseChangeLog>

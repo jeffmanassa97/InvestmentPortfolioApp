@@ -3,4 +3,25 @@
     <changeSet author="jeffmanassa (generated)" id="1613188793563-1">
         <dropColumn columnName="date" tableName="images"/>
     </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613267309071-1">
+        <dropUniqueConstraint constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613267309071-2">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613746035724-3">
+        <addForeignKeyConstraint baseColumnNames="users" baseTableName="house" constraintName="FK5964r75fut5x97pbangsn6xrn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613746035724-4">
+        <addForeignKeyConstraint baseColumnNames="house" baseTableName="images" constraintName="FKbrrs3h48kys6am4x2v0g38w0x" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="house" validate="true"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613746035724-5">
+        <addForeignKeyConstraint baseColumnNames="house_id" baseTableName="mortgage" constraintName="FKlli9donk1ri313fqxjk6jqe5j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="house" validate="true"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613746035724-1">
+        <dropUniqueConstraint constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="jeffmanassa (generated)" id="1613746035724-2">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
 </databaseChangeLog>
