@@ -10,6 +10,7 @@ import com.example.MLS.repository.MortgageRepository;
 import com.example.MLS.repository.UserRepository;
 import com.example.MLS.service.AddInvestmentToUserService;
 import com.example.MLS.service.ImageStorageService;
+import com.example.MLS.service.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,10 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class MlsController {
@@ -31,10 +29,16 @@ public class MlsController {
     private UserRepository userRepository;
 
     @Autowired
+    private HouseRepository houseRepository;
+
+    @Autowired
     AddInvestmentToUserService addInvestmentToUserService;
 
     @Autowired
     private ImageStorageService imageStorageService;
+
+    @Autowired
+    private UtilService utilService;
 
     @RequestMapping("/")
     public String index(){
@@ -66,8 +70,20 @@ public class MlsController {
         return "users";
     }
 
-    @RequestMapping("/Investment")
-    public String investment(){
+    @RequestMapping(value = "/investment", method = {RequestMethod.GET, RequestMethod.POST})
+    public String investment(@RequestParam("id") Long id, Model model){
+
+        System.out.println(id);
+//        House house = houseRepository.findById(id).get();
+        House house = houseRepository.findByHouseId(id);
+
+        if (house == null)
+            System.out.println("house is null");
+
+        model.addAttribute("house", house);
+        model.addAttribute("mortgage", house.getMortgage());
+        model.addAttribute("imageService", imageStorageService);
+        model.addAttribute("utilService", utilService);
         return "investment";
     }
 
@@ -85,8 +101,8 @@ public class MlsController {
         List<House> houses = new ArrayList<>();
         houses.addAll(user.getHouses());
         System.out.println("ADDRESS " + houses.get(0).getAddress() + "\n Size: " + houses.size());
-        System.out.println("ADDRESS " + houses.get(1).getAddress());
-        System.out.println("ADDRESS " + houses.get(2).getAddress());
+//        System.out.println("ADDRESS " + houses.get(1).getAddress());
+//        System.out.println("ADDRESS " + houses.get(2).getAddress());
 
         model.addAttribute("user", user);
         model.addAttribute("houses", houses);
@@ -110,6 +126,16 @@ public class MlsController {
         userRepository.save(user);
 
         return "add_investment_success";
+    }
+
+    @RequestMapping("/MortgageCalculator")
+    public String mortgageCalculator() {
+        return "mortgage_calculator";
+    }
+
+    @RequestMapping("/landing")
+    public String landingPage() {
+        return "landing_page";
     }
 
 

@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <body>
+        <th:block th:fragment="navbar">
+
+            <script type="text/javascript" th:src="@{/js/navbar.js}"></script>
+            <!--<link rel="stylesheet" type="text/css" href="/css/navbar.css">-->
+            <link rel="stylesheet" media="screen" th:href="@{/css/navbar.css}"/>
+
+            <th:block th:if="${#strings.contains(#httpServletRequest.requestURI, 'landing')}">
+                <style>
+                    .affix {
+                        padding: 0;
+                        background-color: #111;
+                    }
+                </style>
+            </th:block>
+            <th:block th:if="${!#strings.contains(#httpServletRequest.requestURI, 'landing')}">
+                <style>
+                    .affix {
+                        padding: 0;
+                        background-color: #111;
+                        position: -webkit-sticky;
+                        position: sticky; top: 0px;
+                    }
+                </style>
+            </th:block>
+
+            <nav class="nav affix">
+                <div class="container-fluid">
+                    <div class="logo">
+                        <a th:href="@{/landing}"><img th:src="@{/images/house-icon.png}" style="height:50px; width:50px" alt="house"/></a>
+                    </div>
+                    <div id="mainListDiv" class="main_list" style="display: block;">
+                        <ul class="navlinks">
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/AllInvestments}">Portfolio</a></li>
+                            <li><a id="m-calc" th:href="@{/MortgageCalculator}">Mortgage Calculator</a><br></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log Out</a></li>
+                            <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}">Log In</a></li>
+                            <li sec:authorize="!isAuthenticated()"><a th:href="@{/register}">Register</a></li>
+                        </ul>
+                    </div>
+                    <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+                </div>
+            </nav>
+
+        </th:block>
+    </body>
+</html>

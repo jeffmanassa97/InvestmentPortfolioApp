@@ -19,38 +19,32 @@
 <body>
 
 
-<nav class="nav">
-    <div class="container">
-        <div class="logo">
-            <a href="#"><img th:src="@{/images/house-icon.png}" style="height:50px; width:50px" alt="house"/></a>
-        </div>
-        <div id="mainListDiv" class="main_list">
-            <ul class="navlinks">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <span class="navTrigger">
-                <i></i>
-                <i></i>
-                <i></i>
-            </span>
-    </div>
-</nav>
+<div th:replace="fragments/navbar :: navbar"></div>
 
-<section class="home">
+<section class="home mb-5">
+    <h2 class="welcome">Welcome!</h2>
 </section>
-<div style="height: 1000px">
+<div style="height: 600px">
     <!-- just to make scrolling effect possible -->
-    <h2 class="myH2">What is this ?</h2>
-    <p class="myP">This is a responsive fixed navbar animated on scroll</p>
-    <p class="myP">I took inspiration from  ABDO STEIF (<a href="https://codepen.io/abdosteif/pen/bRoyMb?editors=1100">https://codepen.io/abdosteif/pen/bRoyMb?editors=1100</a>)
-        and Dicson <a href="https://codepen.io/dicson/pen/waKPgQ">(https://codepen.io/dicson/pen/waKPgQ)</a></p>
-    <p class="myP">I HOPE YOU FIND THIS USEFULL</p>
-    <p class="myP">Albi</p>
+    <h2 class="myH2">What is this?</h2>
+    <p class="myP">The tool to track all your real estate investments in one place.</p>
+    <p class="myP">Whether you need a mortgage calculator, equity tracker, age of major home components, or
+        all your home, mortgage, and rental income information in one place... This app has you covered.</p>
+    <p class="myP">Enjoy!</p>
+    <p class="myP">~Jeffrey Manassa</p>
 </div>
+
+<script>
+$('.nav').removeClass('affix');
+    $(window).scroll(function() {
+        if ($(document).scrollTop() > 50) {
+            $('.nav').addClass('affix');
+            console.log("OK");
+        } else {
+            $('.nav').removeClass('affix');
+        }
+    });
+</script>
 
 
 </body>

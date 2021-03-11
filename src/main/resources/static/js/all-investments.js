@@ -1,14 +1,7 @@
-
-$( document ).ready(function() {
-
-    $('.navTrigger').click(function () {
-        $(this).toggleClass('active');
-        console.log("Clicked menu");
-        $("#mainListDiv").toggleClass("show_list");
-        $("#mainListDiv").fadeIn();
-
-    });
-
+/*$(window).resize(function () {
+    $('body').css('padding-top', parseInt($('.nav').css("height"))+10);
 });
 
-
+$(window).load(function () {
+    $('body').css('padding-top', parseInt($('.nav').css("height"))+10);
+});*/

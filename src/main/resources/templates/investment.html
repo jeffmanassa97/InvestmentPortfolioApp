@@ -5,14 +5,197 @@
     <title>Investment</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
 
-    <script type="text/javascript" th:src="@{/js/all-investments.js}"></script>
-    <link rel="stylesheet" type="text/css" href="/css/all_investments.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" th:src="@{/js/investment.js}"></script>
+    <link rel="stylesheet" type="text/css" href="/css/investment.css">
 
 </head>
 <body>
-Hello there!
+<div th:replace="fragments/navbar :: navbar"></div>
+
+
+<div class="container-fluid justify-content-center mt-50 mb-50">
+    <div class="row mb-3">
+        <div id="carouselExampleIndicators1" class="carousel slide carousel-fade col-md-6 mb-4" data-ride="carousel" style="margin:auto;">
+            <ol class="carousel-indicators">
+                <th:block th:each="i: ${#numbers.sequence(0, house.getImages().size()-1)}">
+                    <li data-target="#carouselExampleIndicators1" th:data-slide-to="${i}"
+                        th:class="${i == 0}  ? 'active':''"></li>
+                </th:block>
+            </ol>
+            <div class="carousel-inner">
+                <th:block th:each="image, stats1 : ${house.getImages()}">
+                    <div th:class="${stats1.index} == 0  ? 'carousel-item active':'carousel-item'">
+                        <img th:src="'data:image/jpeg;base64,' + ${imageService.getBase64(image.getData())}"
+                             class="d-block w-100 card-img img-fluid"/>
+                    </div>
+                </th:block>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-12 border border-dark">
+            <table style="margin:auto; height:100%" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td style="width: 50%;">
+                        <table style="width: 100%;" cellspacing="1" cellpadding="0">
+                            <tbody>
+                            <tr>
+                                <td style="padding-left: 2px;" valign="top"><strong>Address:</strong></td>
+                                <td th:utext="|${house.getAddress()}<br>${house.getState()}, ${house.getZipCode}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;" valign="top"><strong># of Beds:</strong></td>
+                                <td th:utext="|${house.getNumBeds()}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;" valign="top"><strong># of Full Baths:</strong></td>
+                                <td th:utext="|${house.getNumFullBaths()}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong># of Half Baths: </strong></td>
+                                <td th:utext="|${house.getNumHalfBaths()}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong></strong>Year Built:</strong></td>
+                                <td th:utext="|${house.getYearBuilt()}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong></strong>Square Feet:</strong></td>
+                                <td th:utext="|${house.getSquareFeet()}|"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 col-sm-6 col-12 border border-dark">
+            <table style="width: 100%; margin: auto;" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td style="width: 50%; vertical-align: top;">
+                        <table style="width: 100%;" cellspacing="1" cellpadding="0">
+                            <tbody>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;" valign="top"><strong>Purchase Price:</strong></td>
+                                <td th:utext="|$${utilService.formatMoney(house.getPurchasePrice())}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;" valign="top"><strong>Down Payment:</strong></td>
+                                <td th:utext="|$${utilService.formatMoney(house.getDownPaymentAmount())}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong>Fixed Payment:</strong></td>
+                                <td th:utext="|$${utilService.formatMoney(utilService.calculateFixed(mortgage.getInterestRate(), mortgage.getLength(), mortgage.getTotalInitialLoan()))}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;" valign="top"><strong>Date of Closing:</strong></td>
+                                <td th:utext="|${house.getClosingDate()}|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;" valign="top"><strong>Length of Ownership:</strong></td>
+                                <td th:utext="|${utilService.getAge(house.getClosingDate()).getYears()} years, ${utilService.getAge(house.getClosingDate()).getMonths()} months|"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 border border-dark">
+            <h3 style="margin: auto;" class="title mb-2">Age Of Major Items</h3>
+            <table style="width: 100%; margin: auto;" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td style="width: 50%; vertical-align: top;">
+                        <table style="width: 100%;" cellspacing="1" cellpadding="0">
+                            <tbody>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>HVAC Age:</strong> </strong></td>
+                                <td th:utext="|${utilService.getAge(house.getDateHVAC()).getYears()} years, ${utilService.getAge(house.getDateHVAC()).getMonths()} months|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>Roof Age:</strong> </strong></td>
+                                <td th:utext="|${utilService.getAge(house.getDateRoof()).getYears()} years, ${utilService.getAge(house.getDateRoof()).getMonths()} months|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>Plumbing Age:</strong> </strong></td>
+                                <td th:utext="|${utilService.getAge(house.getDatePlumbing()).getYears()} years, ${utilService.getAge(house.getDatePlumbing()).getMonths()} months|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>Water Heater Age:</strong> </strong></td>
+                                <td th:utext="|${utilService.getAge(house.getDateWaterHeater()).getYears()} years, ${utilService.getAge(house.getDateWaterHeater()).getMonths()} months|"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 border border-dark">
+            <h3 style="margin: auto;" class="title mb-2">Equity Paid</h3>
+            <h6 style="margin: auto;" class="title mb-2">(Based on Purchase Price)</h6>
+            <table style="width: 100%; margin: auto;" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td style="width: 50%; vertical-align: top;">
+                        <table style="width: 100%;" cellspacing="1" cellpadding="0">
+                            <tbody>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>Interest Rate:</strong> </strong></td>
+                                <td th:utext="|${mortgage.getInterestRate()}%|"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>Interest Paid:</strong> </strong></td>
+                                <td th:utext='|$${utilService.equityCalculator(mortgage, house).get("InterestPaid")}|'></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>Principal Paid:</strong> </strong></td>
+                                <td th:utext='|$${utilService.equityCalculator(mortgage, house).get("PrincipalPaid")}|'></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>Equity:</strong> </strong></td>
+                                <td th:utext='|$${utilService.equityCalculator(mortgage, house).get("Equity")}|'></td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 2px; width: 50%;"><strong><strong>Equity Percent:</strong> </strong></td>
+                                <td th:utext='|${utilService.equityCalculator(mortgage, house).get("EquityPercent")}|'></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12"><h3 style="margin: auto;" class="title mb-2">Amortization Schedule</h3></div>
+        <div class="col-12 demo">
+            <th:block th:utext="${utilService.amortizationSchedule(mortgage.getInterestRate(), mortgage.getLength(), mortgage.getTotalInitialLoan())}"></th:block>
+        </div>
+    </div>
+
+</div>
+
 </body>

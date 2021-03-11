@@ -95,11 +95,11 @@ public class House {
      */
     public House() {}
 
-    public Long getId() {
+    public Long getHouseId() {
         return houseId;
     }
 
-    public void setId(Long houseId) {
+    public void getHouseId(Long houseId) {
         this.houseId = houseId;
     }
 
